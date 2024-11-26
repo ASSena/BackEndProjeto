@@ -10,6 +10,8 @@ import com.projeto.integrador.dto.MedicoReceber;
 import com.projeto.integrador.model.Medico;
 import com.projeto.integrador.repository.MedicoRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 
 
 @Service
@@ -18,8 +20,13 @@ public class MedicoService {
 	@Autowired
 	private MedicoRepository repository;
 	
-	public List<Medico> detalharMedico(){
+	public List<Medico> detalharTodosMedicos(){
 		return repository.findAll();
+	}
+	
+	public Medico detalharMedico(Long id) {
+		var medico = repository.getReferenceById(id);
+		return medico;
 	}
 	
 	public void registrarMedico(MedicoReceber dto_medico_receber) {
@@ -28,8 +35,8 @@ public class MedicoService {
 	}
 	
 	public void editarMedico(Long id, MedicoEditar editar) {
-		var medico = repository.getReferenceById(id);
-		medico.atualizarDados(editar);
+		var medico = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Médico não encontraco"));
+			medico.atualizarDados(editar);
 	}
 	
 	public void deletarMedico(Long id) {

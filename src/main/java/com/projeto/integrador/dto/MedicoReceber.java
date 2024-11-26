@@ -21,4 +21,5 @@ public record MedicoReceber(
 		Especialidade especialidade,
 		
 		@NotBlank
-		String telefone) {}
+		String telefone
+		) {}

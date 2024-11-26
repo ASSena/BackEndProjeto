@@ -15,6 +15,7 @@ import com.projeto.integrador.dto.MedicoEditar;
 import com.projeto.integrador.dto.MedicoReceber;
 import com.projeto.integrador.service.MedicoService;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -35,7 +36,7 @@ public class MedicoController {
 	@GetMapping
 	@Transactional
 	public ResponseEntity<?> listar(){
-		var medico = service.detalharMedico();
+		var medico = service.detalharTodosMedicos();
 		return ResponseEntity.ok(medico);
 	}
 	
@@ -47,8 +48,15 @@ public class MedicoController {
 	
 	@PutMapping("{id}")
 	public ResponseEntity<?> editarMedico(@PathVariable Long id, @RequestBody MedicoEditar editar){
-		service.editarMedico(id, editar);
-		return ResponseEntity.ok(service.detalharMedico());
+		try {
+			service.editarMedico(id, editar);
+			return ResponseEntity.ok(service.detalharMedico(id));	
+		}catch(EntityNotFoundException e) {
+			return ResponseEntity.badRequest().build();
+		}
+		
+	
+		
 		
 	}
 }
