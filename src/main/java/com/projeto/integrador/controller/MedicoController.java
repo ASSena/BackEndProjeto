@@ -1,8 +1,10 @@
 package com.projeto.integrador.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/")
+@CrossOrigin(origins = "http://127.0.0.1:5500") 
 public class MedicoController {
 	
 	@Autowired
@@ -40,10 +43,14 @@ public class MedicoController {
 		return ResponseEntity.ok(medico);
 	}
 	
-	@DeleteMapping
-	public ResponseEntity<?> deletarMedico(Long id){		
-		service.deletarMedico(id);
-		return ResponseEntity.noContent().build();
+	@DeleteMapping("{id}")
+	public ResponseEntity<?> deletarMedico(@PathVariable Long id){		
+		try {service.deletarMedico(id);
+			return ResponseEntity.noContent().build();
+		}catch(EntityNotFoundException e) {
+			 return ResponseEntity.status(HttpStatus.NOT_FOUND)
+		                .body("Médico não encontrado");
+		}
 	}
 	
 	@PutMapping("{id}")
@@ -52,7 +59,8 @@ public class MedicoController {
 			service.editarMedico(id, editar);
 			return ResponseEntity.ok(service.detalharMedico(id));	
 		}catch(EntityNotFoundException e) {
-			return ResponseEntity.badRequest().build();
+			 return ResponseEntity.status(HttpStatus.NOT_FOUND) 
+		                .body("Médico não encontrado");
 		}
 		
 	
