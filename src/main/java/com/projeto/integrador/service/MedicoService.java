@@ -35,12 +35,12 @@ public class MedicoService {
 	}
 	
 	public void editarMedico(Long id, MedicoEditar editar) {
-		var medico = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Médico não encontraco"));
+		var medico = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Médico não encontrado"));
 		medico.atualizarDados(editar);
 	}
 	
 	public void deletarMedico(Long id) {
-		var medico = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Médico não encontraco"));
+		var medico = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Médico não encontrado"));
 		repository.delete(medico);
 	}
 	
