@@ -23,12 +23,13 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/")
-@CrossOrigin(origins = "https://projeto-integrador-6g4y.vercel.app") 
+@CrossOrigin
 public class MedicoController {
 	
 	@Autowired
 	MedicoService service;
-	
+
+	@CrossOrigin
 	@PostMapping("cadastrarmedicos")
 	@Transactional
 	public ResponseEntity<MedicoReceber> cadastrar(@RequestBody @Valid MedicoReceber receber){
@@ -36,6 +37,7 @@ public class MedicoController {
 		return ResponseEntity.ok().build();
 	}
 	
+	@CrossOrigin
 	@GetMapping
 	@Transactional
 	public ResponseEntity<?> listar(){
@@ -43,6 +45,7 @@ public class MedicoController {
 		return ResponseEntity.ok(medico);
 	}
 	
+	@CrossOrigin
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> deletarMedico(@PathVariable Long id){		
 		try {service.deletarMedico(id);
@@ -53,6 +56,7 @@ public class MedicoController {
 		}
 	}
 	
+	@CrossOrigin
 	@PutMapping("editarmedico{id}")
 	public ResponseEntity<?> editarMedico(@PathVariable Long id, @RequestBody MedicoEditar editar){
 		try {
@@ -65,6 +69,7 @@ public class MedicoController {
 		
 	}
 	
+	@CrossOrigin
 	@GetMapping("{id}")
 	public ResponseEntity<?> medicoEspecifico(@PathVariable Long id){
 		return ResponseEntity.ok(service.medicoId(id));
