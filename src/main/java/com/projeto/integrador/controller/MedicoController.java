@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/")
-@CrossOrigin(origins = "http://127.0.0.1:5500") 
+@CrossOrigin(origins = "https://projeto-integrador-psi.vercel.app") 
 public class MedicoController {
 	
 	@Autowired
@@ -53,7 +53,8 @@ public class MedicoController {
 		}
 	}
 	
-	@PutMapping("{id}")
+	@CrossOrigin(origins = "https://projeto-integrador-psi.vercel.app") 
+	@PutMapping("editarmedico{id}")
 	public ResponseEntity<?> editarMedico(@PathVariable Long id, @RequestBody MedicoEditar editar){
 		try {
 			service.editarMedico(id, editar);
@@ -63,8 +64,10 @@ public class MedicoController {
 		                .body("Médico não encontrado");
 		}
 		
+	}
 	
-		
-		
+	@GetMapping("{id}")
+	public ResponseEntity<?> medicoEspecifico(@PathVariable Long id){
+		return ResponseEntity.ok(service.medicoId(id));
 	}
 }
