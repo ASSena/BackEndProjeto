@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/")
-@CrossOrigin(origins = "https://projeto-integrador-psi.vercel.app") 
+@CrossOrigin(origins = "https://projeto-integrador-6g4y.vercel.app") 
 public class MedicoController {
 	
 	@Autowired
@@ -53,7 +53,6 @@ public class MedicoController {
 		}
 	}
 	
-	@CrossOrigin(origins = "https://projeto-integrador-psi.vercel.app") 
 	@PutMapping("editarmedico{id}")
 	public ResponseEntity<?> editarMedico(@PathVariable Long id, @RequestBody MedicoEditar editar){
 		try {
