@@ -62,5 +62,5 @@ jobs:
           package: '*.jar'
 
         env: # Environment variables to pass to the app
-          SPRING_DATASOURCE_PASSWORD: ${{ secrets.AIVEN_MYSQL_PASSWORD }}
+          SPRING_DATASOURCE_PASSWORD: ${{ env.AIVEN_MYSQL_PASSWORD }}
           
