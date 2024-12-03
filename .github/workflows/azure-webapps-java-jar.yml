@@ -24,7 +24,6 @@ env:
     # set this to the name of your Azure Web App
   JAVA_VERSION: '21'                  # set this to the Java version to use
   DISTRIBUTION: temurin                  # set this to the Java distribution
-  AIVEN_MYSQL_PASSWORD: ${{ AIVEN_MYSQL_PASSWORD }}
 
 on:
   push:
