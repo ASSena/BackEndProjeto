@@ -2,7 +2,9 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
 name: Build and deploy JAR app to Azure Web App - managerdoctor
-
+env:
+  SPRING_DATASOURCE_PASSWORD: ${{ secrets.AIVEN_MYSQL_PASSWORD }}
+  
 on:
   push:
     branches:
@@ -21,10 +23,6 @@ jobs:
         with:
           java-version: '21'
           distribution: 'microsoft'
-
-      - name: Set environment variables
-        env:
-          SPRING_DATASOURCE_PASSWORD: ${{ secrets.AIVEN_MYSQL_PASSWORD }}
 
       - name: Build with Maven
         run: mvn clean install
