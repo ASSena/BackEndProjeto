@@ -22,6 +22,13 @@ jobs:
           java-version: '21'
           distribution: 'microsoft'
 
+      - name: Set environment variables
+        run: |
+          echo "$AIVEN_MYSQL_PASSWORD"  
+        env:
+          SPRING_DATASOURCE_PASSWORD: ${{ env.AIVEN_MYSQL_PASSWORD }}
+          AIVEN_MYSQL_PASSWORD: ${{ env.AIVEN_MYSQL_PASSWORD }}
+          
       - name: Build with Maven
         run: mvn clean install
 
