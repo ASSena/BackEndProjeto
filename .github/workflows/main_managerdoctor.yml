@@ -24,7 +24,7 @@ jobs:
 
       - name: Set environment variables
         run: |
-          echo "$AIVEN_MYSQL_PASSWORD"  
+          echo ${{ env.AIVEN_MYSQL_PASSWORD }}  
         env:
           SPRING_DATASOURCE_PASSWORD: ${{ env.AIVEN_MYSQL_PASSWORD }}
           AIVEN_MYSQL_PASSWORD: ${{ env.AIVEN_MYSQL_PASSWORD }}
