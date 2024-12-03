@@ -60,3 +60,5 @@ jobs:
           app-name: 'managerdoctor'
           slot-name: 'Production'
           package: '*.jar'
+        env:
+          SPRING_DATASOURCE_PASSWORD: ${{ env.AIVEN_MYSQL_PASSWORD }}
