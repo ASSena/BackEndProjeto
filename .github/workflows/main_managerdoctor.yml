@@ -62,3 +62,4 @@ jobs:
           package: '*.jar'
         env:
           SPRING_DATASOURCE_PASSWORD: ${{ env.AIVEN_MYSQL_PASSWORD }}
+          AIVEN_MYSQL_PASSWORD: ${{ env.AIVEN_MYSQL_PASSWORD }}
